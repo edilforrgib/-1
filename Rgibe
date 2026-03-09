@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>I Love You ርግቤ 🕊️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0f0f15;
+color:white;
+overflow-x:hidden;
+}
+
+/* sections */
+
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+}
+
+/* title gradient */
+
+h1{
+font-size:3rem;
+background:linear-gradient(90deg,#ff4d6d,#ff0080,#ff9e00);
+-webkit-background-clip:text;
+color:transparent;
+margin-bottom:20px;
+}
+
+/* text */
+
+p{
+font-size:1.2rem;
+max-width:650px;
+line-height:1.8;
+opacity:0.9;
+}
+
+/* button */
+
+button{
+margin-top:30px;
+padding:15px 35px;
+border:none;
+border-radius:40px;
+font-size:1.1rem;
+cursor:pointer;
+background:linear-gradient(45deg,#ff4d6d,#ff9e00);
+color:white;
+transition:0.4s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* heart animation */
+
+.heart{
+font-size:60px;
+animation:beat 1s infinite;
+margin-bottom:20px;
+}
+
+@keyframes beat{
+0%{transform:scale(1);}
+50%{transform:scale(1.25);}
+100%{transform:scale(1);}
+}
+
+/* floating hearts */
+
+.floating{
+position:fixed;
+bottom:-20px;
+font-size:20px;
+animation:float 10s linear infinite;
+opacity:0.6;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+opacity:0;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-100vh);
+opacity:0;
+}
+
+}
+
+/* gallery */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:40px;
+max-width:900px;
+}
+
+.gallery img{
+width:100%;
+border-radius:20px;
+transition:0.5s;
+}
+
+.gallery img:hover{
+transform:scale(1.1);
+}
+
+/* message typing */
+
+#message{
+font-size:1.5rem;
+margin-top:20px;
+color:#ff9e00;
+}
+
+/* confetti */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- HERO -->
+
+<section>
+
+<div class="heart">❤️</div>
+
+<h1>I Love You ርግቤ 🕊️</h1>
+
+<p>
+From the moment you came into my life,
+everything became brighter, warmer, and more beautiful.
+</p>
+
+<button onclick="startLove()">Open My Heart</button>
+
+</section>
+
+
+<!-- MESSAGE -->
+
+<section>
+
+<h1>A Message From My Heart</h1>
+
+<p id="message"></p>
+
+</section>
+
+
+<!-- GALLERY -->
+
+<section>
+
+<h1>Our Memories</h1>
+
+<div class="gallery">
+
+<img src="https://picsum.photos/400?1">
+<img src="https://picsum.photos/400?2">
+<img src="https://picsum.photos/400?3">
+<img src="https://picsum.photos/400?4">
+
+</div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section>
+
+<h1>Forever With You</h1>
+
+<p>
+
+I don’t know what the future holds…
+
+But I know one thing for sure.
+
+If you are with me,  
+every moment will be beautiful.
+
+I Love You ርግቤ 🕊️ ❤️
+
+</p>
+
+<button onclick="celebrate()">Celebrate Love 🎉</button>
+
+</section>
+
+
+<script>
+
+/* typing effect */
+
+function startLove(){
+
+typeText("You are not just someone special... you are my happiness, my peace, and the most beautiful part of my life. Every time I see your smile, my heart feels full. I love you more than words can ever explain ❤️");
+
+celebrate()
+
+}
+
+function typeText(text){
+
+let i=0
+let speed=40
+let el=document.getElementById("message")
+
+function typing(){
+
+if(i<text.length){
+
+el.innerHTML+=text.charAt(i)
+
+i++
+
+setTimeout(typing,speed)
+
+}
+
+}
+
+typing()
+
+}
+
+/* floating hearts */
+
+function createHeart(){
+
+const heart=document.createElement("div")
+
+heart.classList.add("floating")
+
+heart.innerHTML="❤️"
+
+heart.style.left=Math.random()*100+"vw"
+
+heart.style.fontSize=(20+Math.random()*30)+"px"
+
+heart.style.animationDuration=(5+Math.random()*5)+"s"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{
+
+heart.remove()
+
+},10000)
+
+}
+
+setInterval(createHeart,500)
+
+/* confetti */
+
+const canvas=document.getElementById("confetti")
+
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+
+canvas.height=window.innerHeight
+
+let pieces=[]
+
+function celebrate(){
+
+for(let i=0;i<150;i++){
+
+pieces.push({
+
+x:Math.random()*canvas.width,
+
+y:Math.random()*canvas.height,
+
+r:Math.random()*6+2,
+
+d:Math.random()*50
+
+})
+
+}
+
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ctx.beginPath()
+
+for(let i=0;i<pieces.length;i++){
+
+let p=pieces[i]
+
+ctx.moveTo(p.x,p.y)
+
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true)
+
+}
+
+ctx.fillStyle="white"
+
+ctx.fill()
+
+update()
+
+}
+
+function update(){
+
+for(let i=0;i<pieces.length;i++){
+
+let p=pieces[i]
+
+p.y+=Math.cos(p.d)+1
+
+p.x+=Math.sin(p.d)
+
+if(p.y>canvas.height){
+
+pieces[i]={
+
+x:Math.random()*canvas.width,
+
+y:0,
+
+r:p.r,
+
+d:p.d
+
+}
+
+}
+
+}
+
+}
+
+setInterval(draw,20)
+
+</script>
+
+</body>
+</html>
